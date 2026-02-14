@@ -102,8 +102,12 @@ photoSources.forEach((src, index) => {
     photo.classList.add('photo-card');
     photo.style.backgroundImage = `url('${src}')`;
 
-    // Posicion 3D
-    const radius = 500 + random(-80, 80);
+    // Posicion 3D - Adaptativo segun dispositivo (Compacto en movil)
+    const baseRadius = isMobile ? 340 : 500;
+    const variation = isMobile ? 40 : 80;
+    
+    // Radio responsivo: mas compacto en moviles
+    const radius = baseRadius + random(-variation, variation);
     const angle = angleStep * index + random(-15, 15);
     const height = random(-100, 100);
     const x = radius * Math.cos(toRadians(angle));

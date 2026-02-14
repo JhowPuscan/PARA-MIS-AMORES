@@ -50,6 +50,9 @@ body {
 /* ===================================
    GALAXY - CONTENEDOR ROTATORIO
    =================================== */
+/* ===================================
+   GALAXY - CONTENEDOR ROTATORIO
+   =================================== */
 .galaxy {
     position: relative;
     width: 0;
@@ -57,6 +60,7 @@ body {
     transform-style: preserve-3d;
     animation: spinGalaxy 60s infinite linear;
     transform-origin: center center;
+    will-change: transform; /* Optimización GPU */
 }
 
 @keyframes spinGalaxy {
@@ -74,6 +78,7 @@ body {
     height: 120px;
     background: radial-gradient(circle, var(--neon-pink) 0%, var(--neon-purple) 40%, transparent 70%);
     border-radius: 50%;
+    /* Use fixed box-shadow to avoid repaints */
     box-shadow:
         0 0 60px var(--neon-pink),
         0 0 120px var(--neon-purple),
@@ -83,6 +88,7 @@ body {
     align-items: center;
     filter: blur(8px);
     z-index: 10;
+    will-change: transform;
 }
 
 .core-text {
@@ -98,6 +104,7 @@ body {
         0 0 20px var(--neon-pink),
         0 0 30px var(--neon-purple);
     filter: blur(0px);
+    /* Pulse using transform/opacity instead of text-shadow */
     animation: pulseText 3s ease-in-out infinite;
 }
 
@@ -116,29 +123,40 @@ body {
     background-size: cover;
     background-position: center;
     border: 3px solid rgba(255, 255, 255, 0.7);
+    /* Static box-shadow is fast, animating it is slow. Keep it static. */
     box-shadow:
         0 0 20px rgba(255, 0, 128, 0.6),
         0 0 40px rgba(121, 40, 202, 0.4),
         0 0 60px rgba(0, 212, 255, 0.3);
     border-radius: 12px;
     transform-style: preserve-3d;
+    /* Removed box-shadow and filter from transition for performance */
     transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                box-shadow 0.5s ease,
-                border-color 0.5s ease,
-                filter 0.3s ease;
+                border-color 0.5s ease; 
     cursor: grab;
     overflow: hidden;
-    backdrop-filter: blur(2px);
-    animation: subtleGlow 4s ease-in-out infinite;
+    /* backdrop-filter is expensive on mobile, removed or use carefully. 
+       Replaced with semi-transparent bg if needed, but 'cover' covers it. */
+    /* animation: subtleGlow 4s ease-in-out infinite; -> REMOVED expensive animation */
+    will-change: transform;
+    /* backface-visibility: hidden; -> Removed to prevent cards from vanishing at the back */
 }
 
-@keyframes subtleGlow {
-    0%, 100% {
-        filter: brightness(1) drop-shadow(0 0 10px rgba(255, 0, 128, 0.3));
-    }
-    50% {
-        filter: brightness(1.1) drop-shadow(0 0 20px rgba(121, 40, 202, 0.5));
-    }
+/* Reemplazamos subtleGlow con animación de opacidad en pseudo-elemento */
+.photo-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 12px;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    animation: innerGlow 3s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes innerGlow {
+    from { opacity: 0.3; }
+    to { opacity: 0.7; }
 }
 
 /* Hover - Zoom manteniendo posicion orbital */
@@ -147,6 +165,7 @@ body {
     transform: translate3d(var(--x), var(--y), var(--z)) rotateY(var(--rotY)) scale(1.6) !important;
     border-color: var(--neon-cyan);
     border-width: 4px;
+    /* Static heavy shadow only on hover/active is acceptable */
     box-shadow:
         0 0 30px var(--neon-pink),
         0 0 50px var(--neon-purple),
@@ -154,27 +173,26 @@ body {
         0 0 100px rgba(0, 212, 255, 0.5);
     cursor: grabbing;
     animation-play-state: paused;
-    filter: brightness(1.2) drop-shadow(0 0 40px rgba(0, 212, 255, 1)) contrast(1.1);
     z-index: 1000 !important;
 }
 
-/* Brillo interior */
+/* Brillo interior (Glossy effect) */
 .photo-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     background: linear-gradient(135deg,
-        rgba(255, 0, 128, 0.1) 0%,
+        rgba(255, 255, 255, 0.4) 0%,
         transparent 50%,
-        rgba(0, 212, 255, 0.1) 100%);
+        rgba(255, 255, 255, 0.1) 100%);
     pointer-events: none;
     border-radius: 10px;
-    opacity: 0;
+    opacity: 0.3;
     transition: opacity 0.3s ease;
 }
 
 .photo-card:hover::before {
-    opacity: 1;
+    opacity: 0.6;
 }
 
 /* ===================================
@@ -190,30 +208,31 @@ body {
 
 /* --- TABLETS SMALL / PHONES LARGE (max 768px) --- */
 @media (max-width: 768px) {
-    body { perspective: 800px; }
+    body { perspective: 900px; } /* Perspective tweak for immersion */
     
     /* CLAVE: Escalar toda la galaxia proporcionalmente */
+    /* Aumentado AUN MAS para cubrir bordes (0.75 -> 0.85) */
     .galaxy {
         transform-origin: center center;
-        scale: 0.55; /* La galaxia se reduce al 55% */
+        scale: 0.85; 
     }
     
     .photo-card {
-        width: 110px;
-        height: 140px;
+        width: 130px; /* Slightly larger targets */
+        height: 160px;
         border-width: 2px;
     }
     
     .core {
-        width: 80px;
-        height: 80px;
+        width: 90px;
+        height: 90px;
         box-shadow:
-            0 0 40px var(--neon-pink),
-            0 0 80px var(--neon-purple);
+            0 0 50px var(--neon-pink),
+            0 0 90px var(--neon-purple);
     }
     
     .core-text {
-        font-size: 14px;
+        font-size: 15px;
         letter-spacing: 2px;
     }
     
@@ -225,50 +244,59 @@ body {
 
 /* --- PHONES (max 480px) --- */
 @media (max-width: 480px) {
-    body { perspective: 700px; }
+    body { perspective: 800px; }
     
     .galaxy {
-        scale: 0.42; /* Mas pequeno para pantallas chicas */
+        /* Radio reducido en JS (340px) + Scale 0.7 = Visual Radius ~240px */
+        /* Diameter ~480px. Screen ~360-400px. Fits nicely with overflow (Immersive) */
+        scale: 0.70; 
     }
     
     .photo-card {
-        width: 100px;
-        height: 130px;
+        /* Dimensiones relativas al ancho de pantalla 'Compactas' */
+        width: 28vw;
+        height: 38vw;
+        /* Limites para no verse gigantes en telefonos grandes */
+        max-width: 120px;
+        max-height: 160px;
+        /* Minimos para no verse minusculas en telefonos pequeños */
+        min-width: 90px;
+        min-height: 120px;
     }
     
     .core {
-        width: 60px;
-        height: 60px;
-        filter: blur(6px);
+        width: 70px;
+        height: 70px;
+        filter: blur(5px);
     }
     
     .core-text {
-        font-size: 12px;
+        font-size: 13px;
         letter-spacing: 1px;
     }
 }
 
 /* --- PHONES SMALL (max 380px - iPhone SE, etc) --- */
 @media (max-width: 380px) {
-    body { perspective: 600px; }
+    body { perspective: 700px; }
     
     .galaxy {
-        scale: 0.35;
+        scale: 0.60; /* Aumentado de 0.52 a 0.60 */
     }
     
     .photo-card {
-        width: 90px;
-        height: 115px;
+        width: 95px;
+        height: 120px;
         border-radius: 8px;
     }
     
     .core {
-        width: 50px;
-        height: 50px;
+        width: 55px;
+        height: 55px;
     }
     
     .core-text {
-        font-size: 10px;
+        font-size: 11px;
     }
 }
 
@@ -277,7 +305,7 @@ body {
     body { perspective: 600px; }
     
     .galaxy {
-        scale: 0.35;
+        scale: 0.50; /* Aumentado */
     }
     
     .scene {
