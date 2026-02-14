@@ -1,0 +1,311 @@
+/* ===================================
+   FONDO ESPACIAL ULTRA-REALISTA
+   =================================== */
+
+/* --- CAPA 0: Fondo del Body Mejorado --- */
+/* Gradiente profundo multi-capa que simula espacio real */
+body {
+    background-color: #000 !important;
+    background-image:
+        /* Nebulosa principal: púrpura profundo en el centro */
+        radial-gradient(ellipse at 50% 50%, rgba(17, 0, 40, 0.8) 0%, transparent 60%),
+        /* Nebulosa secundaria: azul sutil a la derecha */
+        radial-gradient(ellipse at 80% 20%, rgba(0, 20, 60, 0.4) 0%, transparent 50%),
+        /* Nebulosa terciaria: rosa sutil a la izquierda */
+        radial-gradient(ellipse at 20% 80%, rgba(40, 0, 30, 0.3) 0%, transparent 50%),
+        /* Base negra */
+        linear-gradient(to bottom, #000005 0%, #020010 50%, #000005 100%) !important;
+}
+
+/* --- CAPA 1: Estrellas Estáticas de Fondo (CSS Puro) --- */
+/* Miles de puntos diminutos usando box-shadow para rendimiento */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    /* Capa densa de estrellas diminutas hechas con box-shadow */
+    background-image:
+        radial-gradient(1px 1px at 10% 10%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 20% 50%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 40% 20%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 50% 60%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 60% 30%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 70% 70%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 80% 40%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 90% 90%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 15% 35%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 25% 65%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 35% 15%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 45% 85%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 55% 45%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 65% 5%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 75% 55%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 85% 25%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 95% 75%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 5% 95%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(2px 2px at 33% 33%, rgba(200,220,255,0.6), transparent),
+        radial-gradient(2px 2px at 66% 66%, rgba(255,240,220,0.5), transparent);
+    background-size: 200px 200px;
+    animation: driftStars 120s linear infinite;
+    opacity: 0.9;
+}
+
+@keyframes driftStars {
+    from { background-position: 0 0; }
+    to { background-position: 200px 200px; }
+}
+
+/* --- CAPA 2: Nebulosa de Fondo --- */
+.nebula-layer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        /* Nube de gas púrpura */
+        radial-gradient(ellipse at 30% 40%, rgba(121, 40, 202, 0.08) 0%, transparent 50%),
+        /* Nube de gas rosa */
+        radial-gradient(ellipse at 70% 60%, rgba(255, 0, 128, 0.06) 0%, transparent 40%),
+        /* Nube de gas azul */
+        radial-gradient(ellipse at 60% 20%, rgba(0, 100, 200, 0.05) 0%, transparent 45%);
+    animation: nebulaDrift 30s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaDrift {
+    0% { opacity: 0.6; transform: scale(1) translate(0, 0); }
+    50% { opacity: 0.9; transform: scale(1.05) translate(10px, -5px); }
+    100% { opacity: 0.7; transform: scale(1.02) translate(-5px, 5px); }
+}
+
+/* --- ESTRELLAS DINÁMICAS (Generadas por JS) --- */
+.star {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    pointer-events: none;
+    top: 50%;
+    left: 50%;
+    will-change: opacity;
+}
+
+/* Tipo 1: Tiny - Polvo estelar lejano */
+.star.tiny {
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0.4;
+    box-shadow: none;
+}
+
+/* Tipo 2: Medium - Estrellas visibles */
+.star.medium {
+    opacity: 0.75;
+    box-shadow: 0 0 3px rgba(255,255,255,0.6);
+}
+
+/* Tipo 3: Bright - Estrellas cercanas con destello */
+.star.bright {
+    background-color: #fff;
+    box-shadow:
+        0 0 4px #fff,
+        0 0 10px rgba(200, 220, 255, 0.8),
+        0 0 20px rgba(100, 150, 255, 0.3);
+    z-index: 2;
+    opacity: 1;
+}
+
+/* Cross Glare: Destello en cruz óptico */
+.star.bright::before,
+.star.bright::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(90deg, transparent 20%, rgba(255,255,255,0.7) 50%, transparent 80%);
+    pointer-events: none;
+}
+.star.bright::before {
+    width: 18px; height: 1px;
+}
+.star.bright::after {
+    width: 1px; height: 18px;
+}
+
+/* Animación: parpadeo realista */
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; }
+    25% { opacity: 0.8; }
+    50% { opacity: 0.4; }
+    75% { opacity: 1; }
+}
+
+/* Animación: pulsación para brillantes */
+@keyframes pulseBright {
+    0%, 100% { opacity: 0.7; filter: brightness(1); }
+    50% { opacity: 1; filter: brightness(1.4); }
+}
+
+/* --- CAPA 3: ESTRELLAS FUGACES --- */
+.shooting-stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.shooting-star {
+    position: absolute;
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.4), transparent);
+    border-radius: 50%;
+    opacity: 0;
+    transform: rotate(-35deg);
+    animation: shoot 8s ease-in-out infinite;
+}
+
+/* Posiciones y tiempos diferentes para cada estrella fugaz */
+.shooting-star:nth-child(1) {
+    top: 10%; left: 70%;
+    animation-delay: 1s;
+    animation-duration: 7s;
+    width: 100px;
+}
+.shooting-star:nth-child(2) {
+    top: 30%; left: 50%;
+    animation-delay: 4s;
+    animation-duration: 9s;
+    width: 80px;
+}
+.shooting-star:nth-child(3) {
+    top: 5%; left: 30%;
+    animation-delay: 8s;
+    animation-duration: 6s;
+    width: 130px;
+}
+.shooting-star:nth-child(4) {
+    top: 50%; left: 85%;
+    animation-delay: 12s;
+    animation-duration: 10s;
+    width: 90px;
+}
+.shooting-star:nth-child(5) {
+    top: 20%; left: 10%;
+    animation-delay: 16s;
+    animation-duration: 8s;
+    width: 110px;
+}
+
+@keyframes shoot {
+    0% {
+        opacity: 0;
+        transform: rotate(-35deg) translateX(0);
+    }
+    2% {
+        opacity: 1;
+    }
+    6% {
+        opacity: 0;
+        transform: rotate(-35deg) translateX(-300px);
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(-35deg) translateX(-300px);
+    }
+}
+
+/* --- Nebulosa dentro de la Galaxia --- */
+.galaxy::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 700px; height: 700px;
+    transform: translate(-50%, -50%);
+    background:
+        radial-gradient(circle, rgba(121, 40, 202, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 40%, rgba(255, 0, 128, 0.06) 0%, transparent 40%);
+    border-radius: 50%;
+    z-index: -1;
+    pointer-events: none;
+    animation: nebulaCore 15s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaCore {
+    from { transform: translate(-50%, -50%) scale(0.9); opacity: 0.5; }
+    to { transform: translate(-50%, -50%) scale(1.15); opacity: 0.9; }
+}
+
+/* --- Ajustes Responsive --- */
+@media (max-width: 768px) {
+    .shooting-star {
+        width: 60px;
+    }
+    
+    .nebula-layer {
+        opacity: 0.4;
+    }
+    
+    /* Desactivar cross-glare en movil para rendimiento */
+    .star.bright::before,
+    .star.bright::after {
+        display: none;
+    }
+
+    /* Nebulosa de galaxia mas pequena */
+    .galaxy::before {
+        width: 400px; height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Reducir aun mas las estrellas fugaces */
+    .shooting-star:nth-child(4),
+    .shooting-star:nth-child(5) {
+        display: none; /* Solo 3 estrellas fugaces en movil */
+    }
+    
+    .shooting-star {
+        width: 40px;
+    }
+    
+    .nebula-layer {
+        opacity: 0.3;
+    }
+    
+    .galaxy::before {
+        width: 250px; height: 250px;
+    }
+    
+    /* Reducir drift de fondo para rendimiento */
+    body::before {
+        animation-duration: 200s;
+    }
+}
+
+@media (max-width: 380px) {
+    .galaxy::before {
+        width: 180px; height: 180px;
+    }
+}
+
+/* Landscape phones */
+@media (max-height: 500px) and (orientation: landscape) {
+    .galaxy::before {
+        width: 300px; height: 300px;
+    }
+}
+
+/* Accesibilidad: sin animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+    .shooting-star,
+    .nebula-layer,
+    body::before {
+        animation: none !important;
+    }
+}

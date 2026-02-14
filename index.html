@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- ===================================
+         META TAGS - SEO & OPTIMIZATION
+         =================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Para Vero y nuestro Thiago - Un pequeño regalo digital que acorta la distancia entre nosotros.">
+    <meta name="keywords" content="amor, familia, galaxia 3D, regalo digital">
+    <meta name="author" content="Con todo mi amor">
+    <meta name="theme-color" content="#11001c">
+
+    <!-- Open Graph / WhatsApp Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Para Vero y Nuestro Thiago 💫">
+    <meta property="og:description"
+        content="Un pequeño regalo digital que acorta la distancia entre nosotros. Ábrelo y explora nuestro universo.">
+    <meta property="og:image" content="./ALBUN DE FOTOS/juntos.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Para Vero y Nuestro Thiago 💫">
+    <meta name="twitter:description" content="Un pequeño regalo digital que acorta la distancia entre nosotros.">
+
+    <!-- ===================================
+         TITLE & FAVICON
+         =================================== -->
+    <title>Para Vero y Nuestro Thiago 💫</title>
+
+    <!-- Favicon dinamico usando emoji -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💫</text></svg>">
+
+    <!-- ===================================
+         FONTS - GOOGLE FONTS
+         =================================== -->
+    <!-- Preconnect para optimización -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Orbitron: Fuente futurista/espacial para el título -->
+    <!-- Inter: Fuente moderna para cualquier texto adicional -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- ===================================
+         PRELOAD CRITICAL RESOURCES
+         =================================== -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+
+    <!-- ===================================
+         STYLESHEETS
+         =================================== -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-emotional.css">
+    <link rel="stylesheet" href="style-stars.css">
+
+    <!-- Additional inline styles for font integration -->
+    <style>
+        /* Loading screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #000000 0%, #11001c 50%, #1a0033 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid #ff0080;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px #ff0080;
+            animation: loadPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes loadPulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===================================
+         LOADING SCREEN
+         =================================== -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+        <div class="loading-text">CARGANDO GALAXIA...</div>
+    </div>
+
+    <!-- ===================================
+         CAPAS DE FONDO ESPACIAL
+         =================================== -->
+    <!-- Capa 1: Estrellas fugaces -->
+    <div class="shooting-stars" aria-hidden="true">
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+    </div>
+
+    <!-- Capa 2: Nebulosas de fondo -->
+    <div class="nebula-layer" aria-hidden="true"></div>
+
+    <!-- ===================================
+         MAIN SCENE - 3D CONTAINER
+         =================================== -->
+    <div class="scene" role="main" aria-label="Nuestro universo de amor">
+
+        <!-- Galaxy Container -->
+        <div class="galaxy" id="galaxy" role="region" aria-label="Galaxia rotativa con fotografías">
+
+            <!-- Core - Núcleo central brillante -->
+            <div class="core" aria-hidden="true">
+                <div class="core-text">V + T</div>
+            </div>
+
+            <!-- Las estrellas y fotos se generan dinámicamente con JavaScript -->
+
+        </div>
+
+        <!-- Baby Star: Thiago - La estrella más brillante -->
+        <div class="baby-star" aria-label="Thiago - La estrella más brillante"></div>
+
+    </div>
+
+    <!-- ===================================
+         EMOTIONAL MESSAGE HEADER
+         =================================== -->
+    <div class="love-message-container">
+        <div class="love-message">
+            <p class="love-line">Aunque vivamos en diferentes ciudades,<br>nuestro amor orbita el mismo universo.</p>
+            <p class="love-line highlight">Vero, mi planeta 🪐</p>
+            <p class="love-line highlight">Thiago, nuestra nueva estrella 🌟</p>
+            <p class="love-line">Y yo… siempre volviendo a casa.</p>
+        </div>
+
+        <div class="signature-block">
+            <p class="signature">Desde lejos, pero a un latido de ustedes ❤️</p>
+
+            <!-- Instrucciones Integradas Sutiles -->
+            <div class="integrated-instructions">
+                <span class="icon">👆</span> Explora nuestro universo - Pasa el cursor para acercarte <span
+                    class="icon">❤️</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         ACCESSIBILITY - SKIP TO CONTENT
+         =================================== -->
+    <a href="#galaxy" class="sr-only" style="position: absolute; left: -9999px;">
+        Saltar al contenido principal
+    </a>
+
+    <!-- ===================================
+         JAVASCRIPT
+         =================================== -->
+    <script src="script.js" defer></script>
+
+    <!-- Script adicional para loading screen -->
+    <script>
+        // Ocultar loading screen cuando la página esté completamente cargada
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loadingScreen');
+
+            // Pequeño delay para asegurar que todas las imágenes estén cargadas
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+
+                // Remover del DOM después de la transición
+                setTimeout(() => {
+                    loadingScreen.remove();
+                }, 800);
+            }, 500);
+        });
+
+        // Fallback: ocultar loading después de 5 segundos máximo
+        setTimeout(() => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen) {
+                loadingScreen.classList.add('hidden');
+            }
+        }, 5000);
+
+        // Log de performance para debugging
+        if (window.performance) {
+            window.addEventListener('load', () => {
+                const perfData = window.performance.timing;
+                const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+                console.log(`⚡ Página cargada en ${pageLoadTime}ms`);
+            });
+        }
+    </script>
+
+    <!-- ===================================
+         STRUCTURED DATA - JSON-LD
+         =================================== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "name": "Para Vero y Nuestro Thiago",
+        "description": "Un pequeño regalo digital que acorta la distancia entre nosotros",
+        "author": {
+            "@type": "Person",
+            "name": "Con todo mi amor"
+        },
+        "dateCreated": "2026-02-14",
+        "genre": "Digital Love Letter"
+    }
+    </script>
+
+</body>
+
+</html>
