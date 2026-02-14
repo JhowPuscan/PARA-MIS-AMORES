@@ -167,7 +167,7 @@
 /* --- TABLETS SMALL / PHONES LARGE (max 768px) --- */
 @media (max-width: 768px) {
     .scene {
-        padding-top: 18vh !important; /* Reducido de 28vh para subir la galaxia */
+        padding-top: 28vh !important;
     }
     
     .love-message-container {
@@ -209,12 +209,11 @@
 /* --- PHONES (max 480px) --- */
 @media (max-width: 480px) {
     .scene {
-        padding-top: 16vh !important; /* Reducido drásticamente de 32vh */
-        align-items: flex-start; /* Alinear al inicio del padding en lugar de centro */
+        padding-top: 32vh !important;
     }
     
     .love-message-container {
-        top: 3%;
+        top: 2%;
         width: 90%; /* Más estrecho para no tocar bordes */
         left: 50%;
         transform: translateX(-50%);
@@ -277,7 +276,7 @@
 /* --- PHONES SMALL (max 380px) --- */
 @media (max-width: 380px) {
     .scene {
-        padding-top: 20vh !important; /* Reducido de 35vh */
+        padding-top: 35vh !important;
     }
     
     .love-message {
